@@ -1,7 +1,10 @@
 # my-docker-toolbox
 Bash commands to work fluently with Docker and the DockerToolbox
-Wndows support : tested with Windows 7, DockerToolbox 1.9, bash shell (comes with the windows git client)
+
+Windows support : tested with Windows 7, DockerToolbox 1.9, bash shell (comes with the windows git client)
+
 MacOS support  : [WANTED] tester
+
 
 # 5 minutes tour
 
