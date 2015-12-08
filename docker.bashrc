@@ -12,15 +12,18 @@
 #
 #
 
-function ssf-docker(){
-   ssf-dm
+function my-docker(){
+   echo "# docker machine commands"
+   my-dm
    echo ""
-   ssf-di
+   echo "# docker image commands"
+   my-di
    echo ""
-   ssf-d
+   echo "# docker commands"
+   my-d
 }
 
-function ssf-dm() {
+function my-dm() {
    echo "dma, dmactive       : docker-machine active"
    echo "dmcreate            : docker-machine create"
    echo "dmenv               : prints info about the active machine"
@@ -179,7 +182,7 @@ alias dmhost='dmip'
 #
 #
 
-function ssf-d() {
+function my-d() {
    echo "dattach             : attach to latest run container"
    echo "dcont [number]      : selects container number from container list (dcls)"
    echo "dls, dps            : docker ps"
@@ -349,14 +352,26 @@ function drun() {
 #
 #
 
-function ssf-di() {
+function my-di() {
    echo "dibuild [name]      : create image from DockerFile"
    echo "dils                : docker images"
    echo "dimg [number]       : activate image from images list, show active image if no args"
+   echo "dipull <image>      : docker pull image"
    echo "dirm                : removes currently active image"
 }
 
 alias dils='docker images'
+
+function dipull() {
+   image=$1
+   if [ -z "$image" ]
+   then
+   	echo "No image name specified, exiting..."
+   fi
+
+   echo "Pulling image $image ..."
+   docker pull $image
+}
 
 function dibuild() {
    image=$1
