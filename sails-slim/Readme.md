@@ -1,3 +1,4 @@
+# If you're in a hurry
 
 bash> docker build -t my/sails-slim .
 
@@ -8,3 +9,9 @@ container# sails new demo
 container# sails generate api user
 
 containerr# sails lift
+
+
+# More inputs for a quick demo
+
+Check https://gist.github.com/ObjectIsAdvantag/27ab7f7c6aefe07aed37
+
