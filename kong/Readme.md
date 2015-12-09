@@ -1,6 +1,7 @@
 
-Check https://hub.docker.com/r/mashape/kong
+Execute bash commands (from my-docker-toolbox)
 
+```
 > dmcreate docker-koing
 
 > dipull mashape/kong
@@ -51,4 +52,8 @@ Check https://hub.docker.com/r/mashape/kong
         ]
       }
 }
-        
+```
+
+Check https://hub.docker.com/r/mashape/kong for more details
+
+     
