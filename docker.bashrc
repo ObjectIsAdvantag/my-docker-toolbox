@@ -30,11 +30,11 @@ function my-dm() {
    echo "dminit [machine]    : (re)sets Docker Toolbox environment, defaults with active machine if unique"
    echo "dmip, dmhost        : prints active machine ip adddress"
    echo "dmls                : docker-machine ls"
+   echo "dmrm [machine]      : docker-machine rm"
    echo "dmreset             : reinstalls certs on docker machine (due to ip address change generally)"
    echo "dmsize              : displays size of Docker Toolbox machines" 
    echo "dmstart             : docker-machine start"
    echo "dmstop              : docker-machine stop"
-
 }
 
 alias dmls='docker-machine ls 2>/dev/null'
@@ -71,6 +71,21 @@ function dmcreate() {
     docker-machine create -d virtualbox $machine
 }
 
+function dmrm() {
+   machine=$1
+   if [ -z "$machine" ]; then
+      echo "No docker machine specified"
+      machine=$DOCKER_MACHINE_NAME
+      if [ -z "$machine" ]; then
+         echo "Did not find any default machine, exiting..."
+	 return
+      fi
+      echo "Will stop default machine"
+   fi
+
+   echo "Removing machine $machine"
+   docker-machine rm $machine
+}
 
 function dmstop() {
    machine=$1
