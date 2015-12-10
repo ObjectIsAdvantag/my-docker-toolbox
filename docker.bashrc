@@ -126,9 +126,10 @@ function dminit() {
    if [ -z "$machine" ]; then
         echo "No docker machine specified, looking for a machine currently running..."
    	eval machine="$(docker-machine ls --filter state=Running | grep Running |  cut -f 1 -d ' ')"
-	if [ -f "$machine" ]; then
+	if [ -z "$machine" ]; then
 	    echo "No docker machine is currently running"
 	    echo "You may "
+	    echo "   dmls          : list existing machines"
 	    echo "   dmcreate      : create a new docker machine"
 	    echo "   dmstart       : start an existing docker maxchine"
 	    return
@@ -369,13 +370,22 @@ function drun() {
 
 function my-di() {
    echo "dibuild [name]      : create image from DockerFile"
-   echo "dils                : docker images"
+   echo "dils                : docker images -a"
    echo "dimg [number]       : activate image from images list, show active image if no args"
    echo "dipull <image>      : docker pull image"
    echo "dirm                : removes currently active image"
 }
 
-alias dils='docker images'
+function dils() {
+   if [ -z "$DOCKER_HOST" ]
+   then
+   	echo "No active image, please dminit [machine] first, exiting..."
+	return
+   fi
+
+   docker images -a
+}
+
 
 function dipull() {
    image=$1
