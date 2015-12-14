@@ -83,6 +83,13 @@ function dmrm() {
       echo "Will stop default machine"
    fi
 
+   read -p "Remove machine $machine [y|(n)]: " answer
+   if [ -z "$answer" ] || [ "$answer" != "y" ]
+   then
+      echo "No, all right, exiting with removing..."
+      return
+   fi
+
    echo "Removing machine $machine"
    docker-machine rm $machine
 }
