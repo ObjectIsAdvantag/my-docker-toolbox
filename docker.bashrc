@@ -376,9 +376,10 @@ function drun() {
 #
 
 function my-di() {
-   echo "dibuild [name]      : create image from DockerFile"
+   echo "dib, dibuild <name> : create image from DockerFile"
+   echo "dih, dihistory      : docker history"
    echo "dils                : docker images -a"
-   echo "dimg [number]       : activate image from images list, show active image if no args"
+   echo "dimg <number>       : activate image from images list, show active image if no args"
    echo "dipull <image>      : docker pull image"
    echo "dirm                : removes currently active image"
 }
@@ -392,6 +393,19 @@ function dils() {
 
    docker images -a
 }
+
+
+function dihistory() {
+   image=$DOCKER_IMAGE_ID
+   if [ -z "$image" ]; then 
+      echo "No active image, first choose an image via dimg [number]"
+      dils
+      return
+   fi
+
+   docker history $image
+}
+alias dih='dihistory'
 
 
 function dipull() {
@@ -415,6 +429,7 @@ function dibuild() {
 
    docker build -t $image .
 }
+alias dib='dibuild'
 
 function dimg() {
    num="$1"
@@ -478,7 +493,6 @@ function dimg() {
 function dirm() {
    image=$DOCKER_IMAGE_ID
    if [ -z "$image" ]; then 
-      
       echo "No active image, first choose an image via dimg [number]"
       dils
       return
